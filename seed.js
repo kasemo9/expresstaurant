@@ -1,4 +1,8 @@
 const {sequelize} = require('./db')
+const { Customer } = require('./models/Customer')
+const { Menu } = require('./models/Menu')
+const { Chef } = require('./models/Chef')
+const { order } = require('./models/order')
 //const {Restaurant, Menu, Item} = require('./models/index') //Q: WHY import these models from index vs. from each separate model file?
 const {Restaurant} = require('./models/Restaurant')
 
@@ -10,16 +14,7 @@ const seedRestaurant = [
     location: 'Texas',
     cuisine: 'FastFood'
   },
-  {
-    name: 'LittleSheep',
-    location: 'Dallas',
-    cuisine: 'Hotpot'
-  },
-  {
-    name: 'Spice Grill',
-    location: 'Houston',
-    cuisine: 'Indian'
-  },
+  
   {
     name: 'burgetking',
     location: 'Dallas',
@@ -30,6 +25,94 @@ const seedRestaurant = [
     location: 'Dallas',
     cuisine: 'Hotpot'
   },
+]
+const seedMenu = [
+  {
+    entree_id: 1111,
+    entree_name: 'Steak',
+    price: 9.99,
+    name: 'AppleBees',
+  },
+  {
+    entree_id: 1232,
+    entree_name: 'Chicken',
+    price: 8.99,
+    name: 'burgetking'
+  },
+  {
+    entree_id: 1232,
+    entree_name: 'Salad',
+    price: 9.99,
+    name: 'MCDS'
+  },
+  
+]
+
+const seedCustomer = [
+  {
+    Cus_id: 101,
+    Payment_id:99,
+    Food_id: 78
+  },
+  {
+    Cus_id: 102,
+    Payment_id: 98,
+    price: 77
+  },
+  {
+    Cus_id: 103,
+    Payment_id: 97,
+    Food_id: 76
+  },
+  
+]
+
+
+
+const seedChef = [
+  {
+    Chef_id: 10111,
+    Chef_name:'Tom',
+    Salary: 78000,
+    Order_id:11123
+  },
+  {
+    Chef_id: 10112,
+    Chef_name:'James',
+    Salary: 78000,
+    Order_id:11124
+  },
+  {
+    Chef_id: 10113,
+    Chef_name:'Robert',
+    Salary: 68000,
+    Order_id:11122
+  },
+  
+]
+
+
+
+const seedorder = [
+  {
+    Order_id: 1001,
+    Quantity:2,
+    Order_date: '2021-12-01',
+    Cus_id:101
+  },
+  {
+    Order_id: 1002,
+    Quantity:1,
+    Order_date: '2021-12-01',
+    Cus_id:102
+  },
+  {
+    Order_id: 1003,
+    Quantity:1,
+    Order_date: '2021-12-01',
+    Cus_id:103
+  },
+  
 ]
 
 // const seedMenu = [
@@ -77,6 +160,10 @@ const seed = async () => {
   try {
     await sequelize.sync({force: true})
     await Restaurant.bulkCreate(seedRestaurant, {validate: true})
+    await Menu.bulkCreate(seedMenu, {validate: true})
+    await Customer.bulkCreate(seedCustomer, {validate: true})
+    await Chef.bulkCreate(seedChef, {validate: true})
+    await order.bulkCreate(seedorder, {validate: true})
     // await Menu.bulkCreate(seedMenu, {validate: true})
     // await Item.bulkCreate(seedItem, {validate: true})
     console.log('Seeding success!')

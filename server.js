@@ -1,7 +1,10 @@
 const express = require('express')
 const path = require('path') //node native module
 const { Restaurant } = require('./models/Restaurant')
-
+const { Menu } = require('./models/Menu')
+const {Customer} = require('./models/Customer')
+const {Chef} = require('./models/Chef')
+const {order} = require('./models/order')
 const app = express()
 const port = 3000
 
@@ -25,6 +28,33 @@ app.get('/restaurants', async (req,res) => {
     const allRestaurants = await Restaurant.findAll()
     //respond with allRestaurants as a json objeect
     res.json(allRestaurants)
+})
+
+app.get('/Menu', async (req,res) => {
+    //find all instances of the Model Restaurant
+    const allMenulist = await Menu.findAll()
+    //respond with allRestaurants as a json objeect
+    res.json(allMenulist)
+})
+
+app.get('/Customer', async (req,res) => {
+    //find all instances of the Model Restaurant
+    const allCustomerlist = await Customer.findAll()
+    //respond with allRestaurants as a json objeect
+    res.json(allCustomerlist)
+})
+
+app.get('/Chef', async (req,res) => {
+    //find all instances of the Model Restaurant
+    const allCheflist = await Chef.findAll()
+    //respond with allRestaurants as a json objeect
+    res.json(allCheflist)
+})
+app.get('/order', async (req,res) => {
+    //find all instances of the Model Restaurant
+    const allorderlist = await order.findAll()
+    //respond with allRestaurants as a json objeect
+    res.json(allorderlist)
 })
 
 app.listen(port, () => {
