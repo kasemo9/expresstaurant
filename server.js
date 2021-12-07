@@ -44,6 +44,7 @@ app.get('/Customer', async (req,res) => {
     res.json(allCustomerlist)
 })
 
+
 app.get('/Chef', async (req,res) => {
     //find all instances of the Model Restaurant
     const allCheflist = await Chef.findAll()
@@ -55,6 +56,20 @@ app.get('/order', async (req,res) => {
     const allorderlist = await order.findAll()
     //respond with allRestaurants as a json objeect
     res.json(allorderlist)
+})
+
+// app.get('/Customer/:Cus_id', async (req,res) => {
+//     //find one specific customter from the customer model
+//     const thisCustomer = await Customer.findOne({where:{Cus_id:reg.params.Cus_id}})
+//     //respond with allRestaurants as a json objeect
+//     res.json(thisCustomer)
+// })
+
+app.get('/Customer/:id', async (req,res) => {
+    //find one specific customter from the customer model
+    const thisCustomer = await Customer.findByPk(req.params.id)
+    //respond with allRestaurants as a json objeect
+    res.json(thisCustomer)
 })
 
 app.listen(port, () => {
