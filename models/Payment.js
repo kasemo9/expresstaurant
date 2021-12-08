@@ -1,18 +1,19 @@
 const {sequelize} = require('../db')
 const {DataTypes, Model} = require('sequelize')
 
-class Customer extends Model {
+class Payment extends Model {
 
 }
 
-Customer.init({
+Payment.init({
     
+    Pay_id: DataTypes.INTEGER,
     Cus_id: DataTypes.INTEGER,
-    Payment_id: DataTypes.INTEGER,
-    entree_id: DataTypes.INTEGER
+    Order_id: DataTypes.INTEGER,
+    Pay_type: DataTypes.STRING
 }, {
     sequelize, 
     timestamps: false
 })
 
-module.exports = {Customer}
+module.exports = {Payment}
